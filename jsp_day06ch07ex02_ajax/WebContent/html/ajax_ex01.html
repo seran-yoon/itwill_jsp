@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+</head>
+
+<body>
+
+    <div id="box">여기에 내용이 보여집니다!</div>
+    <button id="sendBtn">요청하기</button>
+
+    <script>
+        var xhr = new XMLHttpRequest();
+        
+        var sendBtn = document.getElementById("sendBtn");
+        sendBtn.onclick = function() {
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var box = document.getElementById("box");
+                    text = (this.responseText).trim();
+                    dataArr = text.split('|');
+                    row1 = dataArr[0].split(':');
+                    row2 = dataArr[1].split(':');
+                    html = "<table border='1'><tr>";
+                    html += "<td>"+row1[0]+"</td><td>"+row1[1]+"</td>";
+                    html += "</tr><tr>"
+                    html += "<td>"+row2[0]+"</td><td>"+row2[1]+"</td>";
+                    html += "</tr></table>";
+                    box.innerHTML = html;
+                }
+            };
+
+            xhr.open("GET", "../jsp/data.jsp?user=HONG&msg=HELLO", true);
+            xhr.send();
+        
+        }
+    </script>
+
+</body>
+
+</html>
