@@ -1,0 +1,1 @@
+oracle.jdbc.driver.OracleDriver&jdbc:oracle:this:@localhost:1521:oracle&scott&tiger
